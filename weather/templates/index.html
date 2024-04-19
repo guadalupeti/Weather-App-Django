@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+        .card p {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+        }
+        .card img {
+            vertical-align: middle;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name }}
+        </form>
+
+        {% for weather in weather_data %}
+        <div class="card">
+            <p>{{ weather.city }}</p>
+            <h2>{{ weather.temperature }}° F</h2>
+            <p>{{ weather.description }} <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Weather icon"></p> 
+            <button type="submit" name="action" value="{{ weather.city }}" class="btn">Delete City</button>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
